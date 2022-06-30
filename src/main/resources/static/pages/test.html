@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="info in listdata">
+					{{info.userId}}
+					{{info.userName}}
+					{{info.userPassword}}
+				</li>
+			</ul>
+		</div>
+	</body>
+	
+	<script src="../js/vue.js"></script>
+	<script src="../js/axios.min.js"></script>
+	<script>
+		new vue({
+			el: "#app",
+			data: {
+				listdata: [],
+				formdata: {}
+			},
+			created(){
+				this.getAll();
+			},
+			methods: {
+				getAll(){
+					axios.get("http://localhost/users").then(res=>{
+						this.listdata=res.data;
+					})
+				},
+			},
+			
+		})
+	</script>
+	
+</html>
